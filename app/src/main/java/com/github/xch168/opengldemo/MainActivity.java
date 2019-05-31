@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         mGlSurfaceView = findViewById(R.id.gl_sv);
         mGlSurfaceView.setEGLContextClientVersion(2);
         mGlSurfaceView.setEGLConfigChooser(8, 8, 8, 8, 16, 0);
-        mGlSurfaceView.setRenderer(new GLRenderer());
+        mGlSurfaceView.setRenderer(new TextureRenderer(this));
         mGlSurfaceView.setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
     }
 

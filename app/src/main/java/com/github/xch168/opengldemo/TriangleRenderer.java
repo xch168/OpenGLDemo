@@ -13,7 +13,7 @@ import javax.microedition.khronos.opengles.GL10;
 /**
  * Created by XuCanHui on 2019-05-30.
  */
-public class GLRenderer implements GLSurfaceView.Renderer {
+public class TriangleRenderer implements GLSurfaceView.Renderer {
 
     private static final String VERTEX_SHADER =
             "attribute vec4 vPosition;\n"
@@ -28,9 +28,9 @@ public class GLRenderer implements GLSurfaceView.Renderer {
             + "}";
 
     private static final float[] VERTEX = {
-        0, 1, 0,
-        -0.5f, -1, 0,
-        1, -1, 0
+        0, 1, 0, // top
+        -0.5f, -1, 0, // bottom left
+        1, -1, 0 // bottom right
     };
 
     private final FloatBuffer mVertexBuffer;
@@ -38,7 +38,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
     private int mProgram;
     private int mPositionHandler;
 
-    public GLRenderer() {
+    public TriangleRenderer() {
         mVertexBuffer = ByteBuffer.allocateDirect(VERTEX.length * 4)
                 .order(ByteOrder.nativeOrder())
                 .asFloatBuffer()
