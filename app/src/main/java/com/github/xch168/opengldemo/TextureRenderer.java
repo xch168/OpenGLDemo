@@ -29,7 +29,7 @@ public class TextureRenderer implements GLSurfaceView.Renderer {
             "attribute vec2 a_texCoord;" +
             "varying vec2 v_texCoord;" +
             "void main() {" +
-            "  gl_position = uMVPMatrix * vPosition;" +
+            "  gl_Position = uMVPMatrix * vPosition;" +
             "  v_texCoord = a_texCoord;" +
             "}";
 
@@ -49,10 +49,10 @@ public class TextureRenderer implements GLSurfaceView.Renderer {
     };
 
     private static final float[] TEX_VERTEX = {
-        0.5f, 0, // bottom right
+        1.0f, 0, // bottom right
         0, 0, // bottom left
-        0, 0.5f, // top left
-        0.5f, 0.5f  // top right
+        0, 1.0f, // top left
+        1.0f, 1.0f  // top right
     };
 
     private static final short[] VERTEX_INDEX = {0, 1, 2, 0, 2, 3};
@@ -101,6 +101,8 @@ public class TextureRenderer implements GLSurfaceView.Renderer {
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+
         mProgram = GLES20.glCreateProgram();
         int vertexShader = loadShader(GLES20.GL_VERTEX_SHADER, VERTEX_SHADER);
         int fragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER, FRAGMENT_SHADER);
@@ -111,7 +113,7 @@ public class TextureRenderer implements GLSurfaceView.Renderer {
 
         mPositionHandle = GLES20.glGetAttribLocation(mProgram, "vPosition");
         mTexCoordHandle = GLES20.glGetAttribLocation(mProgram, "a_texCoord");
-        mMatrixHandle = GLES20.glGetAttribLocation(mProgram, "uMVPMatrix");
+        mMatrixHandle = GLES20.glGetUniformLocation(mProgram, "uMVPMatrix");
         mTexSamplerHandle = GLES20.glGetUniformLocation(mProgram, "s_texture");
 
         GLES20.glEnableVertexAttribArray(mPositionHandle);
